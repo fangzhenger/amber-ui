@@ -1,0 +1,51 @@
+.amber-tree-select {
+  // box-sizing: border-box;
+  .amber-section-box {
+    border: 1px solid #d9d9d9;
+
+    .amber-select {
+      display: flex;
+      justify-content: space-between;
+      height: 32px;
+
+      .amber-select-selector {
+        width: 100%;
+        padding: 0 11px;
+
+        &-search {
+          box-sizing: border-box;
+
+          &-input {
+            border: none;
+            outline: none;
+            background: 0 0;
+            margin-left: 5px;
+            height: 100%;
+            width: 100%;
+            font-size: 14px;
+            cursor: auto;
+            appearance: none;
+            font-family: auto;
+            color: currentcolor;
+          }
+        }
+      }
+
+      .amber-select-arrow {
+        display: flex;
+        align-items: center;
+        color: inherit;
+        line-height: 32px;
+        margin-right: 10px;
+        &-icon{
+          color:#00000040 ;
+          width: 15px !important;
+          height: 15px !important;
+        }
+      }
+    }
+  }
+  .amber-section-selectList{
+    box-sizing: border-box;
+  }
+}

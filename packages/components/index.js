@@ -40,6 +40,7 @@ import InputNumber from './inputNumber'
 import Rate from './rate/index'
 import Card from './card/index'
 import InfiniteScroll from './infinite-scroll/index'
+import TreeSelect from './treeSelect/index'
 
 const components = [
   Icon,
@@ -80,7 +81,8 @@ const components = [
   TimePicker,
   InputNumber,
   Rate,
-  Card
+  Card,
+  TreeSelect
 ]
 const directives = [InfiniteScroll]
 

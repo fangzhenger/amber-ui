@@ -2,8 +2,8 @@
   <ul class="tree-select-ul">
     <li class="tree-select-ul-list" :style="getTreeSelectWidth">
       <!-- 展示列表图标方向 -->
-      <div class="tree-select-ul-list-expand" @click="handleExpand">
-        <span class="tree-select-ul-list-expand-icon">
+      <div class="tree-select-ul-list-expand">
+        <span class="tree-select-ul-list-expand-icon" @click="handleExpand">
           <span v-if="data.children && data.children.length && !data.expand">
             <amber-icon icon-class="xiangyou"></amber-icon>
           </span>
@@ -69,39 +69,26 @@ export default {
   mounted() {
     this.getDataList()
   },
-  created() {
-    let parent = this.$parent
-    console.log(parent)
-    while (parent && !parent.isTreeRoot) {
-      parent = parent.$parent
-    }
-    // selectree 就是树的根组件
-    this.selectree = parent
-  },
   data() {
     return {
       dataList: [],
-      isExpand: false,
       ispicked: false,
-      tree: findComponentUpward(this, 'Tree'),
+      tree: findComponentUpward(this, 'AmberTreeSelect'), // 向上找到最近的指定组件
       isTreeRoot: true,
       selectree: null
     }
   },
   methods: {
     getDataList() {},
+    /** 是否展开 */
     handleExpand() {
       this.$set(this.data, 'expand', !this.data.expand)
-      if (this.tree) {
-        this.tree.emitEvent('on-toggle-expand', this.data)
-      }
     },
-    handleCheck(checked) {
-      this.updateTreeDown(this.data, checked)
-
-      if (this.tree) {
-        this.tree.emitEvent('on-check-change', this.data)
-      }
+    handleCheck() {
+      // this.updateTreeDown(this.data, checked)
+      // if (this.tree) {
+      //   this.tree.emitEvent('on-check-change', this.data)
+      // }
     },
     updateTreeDown(data, checked) {
       this.$set(data, 'checked', checked)
@@ -111,15 +98,14 @@ export default {
         })
       }
     },
-    pickHandle(e) {
-      if (this.selectree) {
-        console.log(this.selectree)
-        this.selectree.$emit('pickHandle', e)
+    pickHandle(value) {
+      // 用实例去赋值
+      if (this.tree) {
+        // 将值给输入框
+        this.tree.input = value
+        // 要关闭
+        this.tree.isShow = false
       }
-      // this.$emit('pickHandle', e)
-      // console.log(this.selectree)
-
-      // this.$emit('pickHandke',)
     }
   }
 }

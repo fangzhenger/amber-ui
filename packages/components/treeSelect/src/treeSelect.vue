@@ -34,12 +34,7 @@
       </section>
       <div class="amber-section-selectList" v-if="isShow" ref="amberSectionBox">
         <!-- 这里循环的时候treeList的值 -->
-        <tree-select-node
-          v-for="(item, index) in cloneData"
-          :key="index"
-          :data="item"
-          @pickHandle="changeValue(item)"
-        >
+        <tree-select-node v-for="(item, index) in cloneData" :key="index" :data="item">
         </tree-select-node>
       </div>
     </div>
@@ -89,6 +84,15 @@ export default {
   watch: {
     data() {
       this.getTreeList()
+    },
+    input: {
+      immediate: false,
+      handler(newValue) {
+        this.input = newValue
+        // 去搜索
+        // this.filterData(this.input)
+        // console.log(this.input)
+      }
     }
   },
   computed: {
@@ -136,11 +140,36 @@ export default {
     handlerInpput(e) {
       this.$emit('input', e.target.value)
     },
-    changeValue(item) {
-      // console.log(value, 'valuedddddddddddddd')
-      console.log(item, 'valuefzzzzzzzzzzzzzz')
-      // 将拿到的值给input
-      // this.input = value
+    filterData(value) {
+      console.log(this.cloneData, 'this.cloneDats')
+      // const treeList = JSON.parse(JSON.stringify(this.cloneData))
+      const datax = this.filtersX(value, this.cloneData)
+      console.log(datax, 'ffffff')
+      this.cloneData = datax
+    },
+    filtersX(val, dataList) {
+      let data = dataList
+      data.forEach((item) => {
+        if (item.children && item.children.length) {
+          // eslint-disable-next-line no-param-reassign
+          item.children = item.children.filter((x) => {
+            if (x.children && x.children.length) {
+              return x.children
+                .map((a) => a.label)
+                .toString()
+                .includes(val)
+            }
+            // return x.label.indexOf(val) !== -1
+            return x.label.indexOf(val) !== -1
+          })
+          this.filtersX(val, item.children)
+        } else {
+          data = []
+        }
+        // 如果没有呢
+      })
+      console.log(data, 'data')
+      return data
     }
   }
 }

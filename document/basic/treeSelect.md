@@ -18,8 +18,7 @@
 ></amber-tree-select>
 <script>
   export default {
-    mounted() {
-    },
+    mounted() {},
     data() {
       return {
         value: '123',
@@ -86,6 +85,10 @@
       }
     },
     methods: {
+      // changeValue(value) {
+      //   console.log(value, 'vakuessssss')
+      //   // console.log(value[1], 'vakuessssss')
+      // }
       // inputHandle() {
       //   // console.log('input', this.value)
       // }

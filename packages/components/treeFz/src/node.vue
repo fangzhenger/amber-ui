@@ -16,7 +16,7 @@
           @change="handleCheck"
           :checked="data.checked"
         ></amber-checkbox>
-        <span class="tree-ul-list-expand-label" @click.stop="pickHandle(data.label)">{{
+        <span class="tree-ul-list-expand-label" @click.stop="pickHandle(data)">{{
           data.label
         }}</span>
       </div>
@@ -87,10 +87,10 @@ export default {
         })
       }
     },
-    pickHandle(value) {
-      console.log(value, 'value')
-      if(this.tree){
-        this.tree.emitEvent('on-change-value',value)
+    pickHandle(data) {
+      console.log(data, 'data')
+      if (this.tree) {
+        this.tree.emitEvent('on-change-value', data.label)
       }
     }
   }

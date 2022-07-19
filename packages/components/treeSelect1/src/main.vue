@@ -1,5 +1,5 @@
 <template>
-  <amber-select :value="input">
+  <amber-select v-model="input" ref="select">
     <amber-tree-fz :data="data" ref="selectTree" @on-change-value="changeValue"></amber-tree-fz>
   </amber-select>
   <!-- <amber-select :style="getWidth" class="select">
@@ -59,7 +59,7 @@ export default {
       valueId: this.value, // 初始值
       filterText: '',
       selectTree: findComponentUpward(this, 'AmberSelect'),
-      input:'请选择'
+      input: '请选择'
     }
   },
   computed: {
@@ -76,10 +76,11 @@ export default {
     changeValue(value) {
       console.log(value, 'calue')
       console.log(this.selectTree)
+      this.input = value
+      this.$refs.select.display()
       if (this.selectTree) {
         console.log(this.selectTree.selectVal)
         this.selectTree.selectVal = value
-
       }
 
       /* selectVal 拿到这个组件的这个值 */

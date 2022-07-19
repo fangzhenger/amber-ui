@@ -28,10 +28,15 @@
         }"
         v-else-if="!showSearch && mode == 'default'"
       >
-        {{ selectVal ? selectItem.label : placeholder }}
+        {{ selectVal }}
       </div>
       <div v-else class="amber-select-input">
-        <input :placeholder="placeholder" v-if="currentSelectList.length == 0" />
+        <input
+          :value="selectVal"
+          @input="onChange"
+          :placeholder="placeholder"
+          v-if="currentSelectList.length == 0"
+        />
         <ul class="selected-list-container">
           <li
             class="selected-list-container-item"
@@ -184,8 +189,11 @@ export default {
         }
       }, 10)
     },
-    value(val) {
-      this.selectVal = val
+    value: {
+      immediate: true,
+      handler(val) {
+        this.selectVal = val
+      }
     }
   },
   mounted() {
@@ -224,7 +232,7 @@ export default {
     onChange(e) {
       this.$emit('search', e.target.value)
       this.selectVal = e.target.value
-      console.log(this.selectVal,"this,selectVal")
+      console.log(this.selectVal, 'this,selectVal')
       if (this.selectVal) {
         this.selectListDisplay = true
       } else {

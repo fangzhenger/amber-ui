@@ -25,8 +25,10 @@ exports.Sidebar4ZH = [
       "/basic/divider",
       "/basic/notification",
       "/basic/tree",
+      "/basic/treeFz",
       "/basic/infinitescroll",
       "/basic/treeSelect",
+      "/basic/treeSelect1",
     ],
   },
 {

@@ -33,6 +33,7 @@ import FormItem from './formItem/index'
 import Checkbox from './checkbox/index'
 import CheckboxGroup from './checkbox-group/index'
 import Tree from './tree/index'
+import TreeFz from './treeFz/index'
 import DatePicker from './date-picker/index'
 import TimeSelect from './time-select/index'
 import TimePicker from './time-picker/index'
@@ -41,6 +42,7 @@ import Rate from './rate/index'
 import Card from './card/index'
 import InfiniteScroll from './infinite-scroll/index'
 import TreeSelect from './treeSelect/index'
+import TreeSelect1 from './treeSelect1/index'
 
 const components = [
   Icon,
@@ -77,12 +79,14 @@ const components = [
   CheckboxGroup,
   DatePicker,
   Tree,
+  TreeFz,
   TimeSelect,
   TimePicker,
   InputNumber,
   Rate,
   Card,
-  TreeSelect
+  TreeSelect,
+  TreeSelect1
 ]
 const directives = [InfiniteScroll]
 

@@ -113,7 +113,8 @@ export default {
     return {
       isShow: false,
       cloneData: [],
-      input: ''
+      input: '',
+      tempTreeData: []
     }
   },
   methods: {
@@ -122,6 +123,8 @@ export default {
     },
     getTreeList() {
       this.cloneData = deepCopy(this.dataSource)
+      // 用来存储源数据 方便后续使用
+      this.tempTreeData = deepCopy(this.dataSource)
     },
     init() {
       window.addEventListener(
@@ -138,8 +141,52 @@ export default {
       )
     },
     handlerInpput(e) {
-      this.$emit('input', e.target.value)
+      // this.$emit('input', e.target.value)
+
+      // 每次输入查询条件的时候 都需要还原一下源数据 重新搜索
+      this.cloneData = deepCopy(this.tempTreeData)
+
+      // 查找数据
+      const result = this.rebuildData(this.input, this.cloneData)
+
+      // 如果有值 就展示出来
+      if (result.length) {
+        this.cloneData = result
+      } else {
+        this.cloneData = []
+      }
     },
+    // 嵌套数组查询数据
+    /**
+     * @value 要查询的值{string}
+     * @arr  数据源{Array}
+     */
+    rebuildData(value, arr) {
+      const treeList = JSON.parse(JSON.stringify(arr))
+      let newarr = []
+      arr.forEach((element) => {
+        if (element.children && element.children.length) {
+          const ab = this.rebuildData(value, element.children)
+          const obj = {
+            ...element,
+            children: ab
+          }
+          if (ab && ab.length) {
+            newarr.push(obj)
+          }
+        } else {
+          if (this.trimAll(element.label).indexOf(value) > -1) {
+            newarr.push(element)
+          }
+        }
+      })
+      return newarr
+    },
+    // 去除所有字符串
+    trimAll(ele) {
+      return ele.split('').join('')
+    },
+
     filterData(value) {
       console.log(this.cloneData, 'this.cloneDats')
       // const treeList = JSON.parse(JSON.stringify(this.cloneData))
@@ -151,7 +198,6 @@ export default {
       let data = dataList
       data.forEach((item) => {
         if (item.children && item.children.length) {
-          // eslint-disable-next-line no-param-reassign
           item.children = item.children.filter((x) => {
             if (x.children && x.children.length) {
               return x.children
@@ -159,14 +205,12 @@ export default {
                 .toString()
                 .includes(val)
             }
-            // return x.label.indexOf(val) !== -1
             return x.label.indexOf(val) !== -1
           })
           this.filtersX(val, item.children)
         } else {
           data = []
         }
-        // 如果没有呢
       })
       console.log(data, 'data')
       return data

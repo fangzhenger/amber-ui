@@ -50,6 +50,9 @@ export default {
     getTreeList() {
       // 为了在tree.vue组件中不破坏使用者传递的源数据dataSource,将在下面克隆一份数据(cloneData)
       this.cloneData = deepCopy(this.data)
+    },
+    emitEvent(eventName, data) {
+      this.$emit(eventName, data)
     }
   }
 }

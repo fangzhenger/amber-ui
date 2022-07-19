@@ -224,6 +224,7 @@ export default {
     onChange(e) {
       this.$emit('search', e.target.value)
       this.selectVal = e.target.value
+      console.log(this.selectVal,"this,selectVal")
       if (this.selectVal) {
         this.selectListDisplay = true
       } else {

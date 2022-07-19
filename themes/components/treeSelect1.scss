@@ -1,0 +1,17 @@
+.select {
+   position: relative !important;
+  .amber-select-option{
+    height: 300 !important;
+    position: relative !important;
+  }
+  .options {
+    &-tree {
+      margin: 0px;
+      width:100%;
+      position: absolute;
+      z-index:99999 !important;
+      top: 0px;
+      // left: 139px;
+    }
+  }
+}

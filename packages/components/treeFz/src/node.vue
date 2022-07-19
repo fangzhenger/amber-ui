@@ -16,7 +16,7 @@
           @change="handleCheck"
           :checked="data.checked"
         ></amber-checkbox>
-        <span class="tree-ul-list-expand-label">{{
+        <span class="tree-ul-list-expand-label" @click.stop="pickHandle(data.label)">{{
           data.label
         }}</span>
       </div>
@@ -36,6 +36,7 @@
   </ul>
 </template>
 <script>
+import { findComponentUpward } from '../../../../utils/assist'
 export default {
   name: 'TreeNode',
   props: {
@@ -52,7 +53,9 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      tree: findComponentUpward(this, 'AmberTreeFz')
+    }
   },
   watch: {
     'data.children': {
@@ -82,6 +85,12 @@ export default {
         data.children.forEach((item) => {
           this.updateTreeDown(item, checked)
         })
+      }
+    },
+    pickHandle(value) {
+      console.log(value, 'value')
+      if(this.tree){
+        this.tree.emitEvent('on-change-value',value)
       }
     }
   }

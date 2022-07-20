@@ -88,7 +88,6 @@ export default {
       }
     },
     pickHandle(data) {
-      console.log(data, 'data')
       if (this.tree) {
         this.tree.emitEvent('on-change-value', data.label)
       }

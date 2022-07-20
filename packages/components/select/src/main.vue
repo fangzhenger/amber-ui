@@ -1,5 +1,6 @@
 <template>
   <div class="amber-select-container" :class="classesSize">
+    <!--  -->
     <div
       class="amber-select-box"
       @click.stop="display()"
@@ -217,14 +218,19 @@ export default {
       /* 监听click事件，点击下拉选择框以外的元素，自动收缩下拉框 */
       window.document.addEventListener('click', (e) => {
         const thisClassName = e.target.className
-        if (
-          this.selectListDisplay &&
-          thisClassName.indexOf('amber-select-box') < 0 &&
-          thisClassName.indexOf('amber-select-list') < 0 &&
-          thisClassName.indexOf('amber-select-option') < 0
-        ) {
-          this.selectListDisplay = false
+        // 判断是否点击的是图标
+        if (!Object.prototype.toString.call(thisClassName) === '[object SVGAnimatedString]') {
+          if (
+            thisClassName &&
+            this.selectListDisplay &&
+            thisClassName.indexOf('amber-select-box') < 0 &&
+            thisClassName.indexOf('amber-select-list') < 0 &&
+            thisClassName.indexOf('amber-select-option') < 0
+          ) {
+            this.selectListDisplay = false
+          }
         }
+
         e.stopPropagation()
       })
       this.hasSuffixIcon = !!this.$slots.suffixIcon

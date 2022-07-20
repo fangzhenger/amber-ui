@@ -13,10 +13,16 @@
                 class="amber-select-selector-search-input"
                 v-model="input"
                 @input="handlerInpput"
-              />
+              ></input>
+              <!-- <amber-icon
+                v-if="isShow"
+                class="amber-select-selector-search-errorIcon"
+                icon-class="error"
+                @click="resetHandle"
+            ></amber-icon> -->
             </span>
           </div>
-          <!-- 搜索图标 -->
+          <!-- 搜索图标 -->         
           <span class="amber-select-arrow">
             <!-- 此处还可优化 -->
             <amber-icon
@@ -185,6 +191,11 @@ export default {
     // 去除所有字符串
     trimAll(ele) {
       return ele.split('').join('')
+    },
+    resetHandle(e){
+    console.log(object)
+      console.log("sss")
+      this.input =''
     },
 
     filterData(value) {

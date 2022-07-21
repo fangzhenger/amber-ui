@@ -6,6 +6,62 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "969791",
+      "name": "加载",
+      "font_class": "loading",
+      "unicode": "e697",
+      "unicode_decimal": 59031
+    },
+    {
+      "icon_id": "1315275",
+      "name": "Loading",
+      "font_class": "91jiazai",
+      "unicode": "e6a0",
+      "unicode_decimal": 59040
+    },
+    {
+      "icon_id": "1486824",
+      "name": "加载",
+      "font_class": "jiazai",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "7055655",
+      "name": "加载",
+      "font_class": "jiazai1",
+      "unicode": "e72f",
+      "unicode_decimal": 59183
+    },
+    {
+      "icon_id": "7127384",
+      "name": "加载",
+      "font_class": "jiazai2",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "7629052",
+      "name": "加载",
+      "font_class": "jiazai3",
+      "unicode": "e6b4",
+      "unicode_decimal": 59060
+    },
+    {
+      "icon_id": "12225046",
+      "name": "加载",
+      "font_class": "jiazai4",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "18404266",
+      "name": "加载",
+      "font_class": "jiazai5",
+      "unicode": "e6de",
+      "unicode_decimal": 59102
+    },
+    {
       "icon_id": "630085",
       "name": "向上箭头",
       "font_class": "xiangshangjiantou",

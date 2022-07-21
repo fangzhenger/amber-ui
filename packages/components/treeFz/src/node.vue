@@ -16,6 +16,8 @@
           @change="handleCheck"
           :checked="data.checked"
         ></amber-checkbox>
+        <!-- loading 加载 -->
+        <!-- <span v-if="node.loading"> </span> -->
         <span class="tree-ul-list-expand-label" @click.stop="pickHandle(data)">{{
           data.label
         }}</span>

@@ -11,7 +11,7 @@
             <amber-icon icon-class="xiangxia"></amber-icon
           ></span>
         </span>
-        <span class="tree-select-ul-list-expand-label" @click="pickHandle(data.label)">{{
+        <span class="tree-select-ul-list-expand-label" @click="pickHandle(data.label)" :class="data.children?'':'tree-select-ul-list-expand-label-left' ">{{
           data.label
         }}</span>
       </div>
@@ -133,7 +133,11 @@ export default {
       &-label{
         width: 100%;
         color: currentcolor;    /* 去除默认的颜色和点击后变化的颜色 */
+        &-left{
+          margin-left:15px;
+        }
       }
+
       &-label:hover{
        background-color:#BAE7FF
       }

@@ -5,7 +5,7 @@
       <section class="amber-section-box" @click="isShow = !isShow" ref="amberSectionBox">
         <div class="amber-select">
           <!-- placeholder + 其他框 -->
-          <div class="amber-select-selector">
+          <div class="amber-select-selector" @mouseleave="onLeaveHandle">
             <span class="amber-select-selector-search">
               <input
                 type="search"
@@ -13,29 +13,31 @@
                 class="amber-select-selector-search-input"
                 v-model="input"
                 @input="handlerInpput"
-              ></input>
-              <!-- <amber-icon
-                v-if="isShow"
-                class="amber-select-selector-search-errorIcon"
-                icon-class="error"
-                @click="resetHandle"
-            ></amber-icon> -->
+                @mouseenter="onEnterHandle"
+              >
+               <!-- 搜索图标 -->
+                <span class="amber-select-arrow">
+                  <amber-icon
+                    v-if="!isShow && !hasValue"
+                    icon-class="xiangxiajiantou"
+                    class="amber-select-arrow-icon"
+                  ></amber-icon>
+                  <amber-icon
+                    v-if="isShow && !hasValue"
+                    icon-class="sousuo_o"
+                    class="amber-select-arrow-icon"
+                  ></amber-icon>
+                </span>
+                  <!-- 鼠标悬在上面 出现的图标 -->
+                <a href="javascript:void(0);" @click="resetHandle" v-if="hasValue">
+                  <amber-icon
+                      class="amber-select-selector-search-errorIcon"
+                      icon-class="error"
+                  ></amber-icon>
+               </a>
+              </input>
             </span>
           </div>
-          <!-- 搜索图标 -->         
-          <span class="amber-select-arrow">
-            <!-- 此处还可优化 -->
-            <amber-icon
-              v-if="!isShow"
-              icon-class="xiangxiajiantou"
-              class="amber-select-arrow-icon"
-            ></amber-icon>
-            <amber-icon
-              v-if="isShow"
-              icon-class="sousuo_o"
-              class="amber-select-arrow-icon"
-            ></amber-icon>
-          </span>
         </div>
       </section>
       <div class="amber-section-selectList" v-if="isShow" ref="amberSectionBox">
@@ -95,9 +97,6 @@ export default {
       immediate: false,
       handler(newValue) {
         this.input = newValue
-        // 去搜索
-        // this.filterData(this.input)
-        // console.log(this.input)
       }
     }
   },
@@ -118,6 +117,7 @@ export default {
   data() {
     return {
       isShow: false,
+      hasValue :false,
       cloneData: [],
       input: '',
       tempTreeData: []
@@ -147,14 +147,9 @@ export default {
       )
     },
     handlerInpput(e) {
-      // this.$emit('input', e.target.value)
-
       // 每次输入查询条件的时候 都需要还原一下源数据 重新搜索
       this.cloneData = deepCopy(this.tempTreeData)
-
-      // 查找数据
       const result = this.rebuildData(this.input, this.cloneData)
-
       // 如果有值 就展示出来
       if (result.length) {
         this.cloneData = result
@@ -168,18 +163,27 @@ export default {
      * @arr  数据源{Array}
      */
     rebuildData(value, arr) {
-      const treeList = JSON.parse(JSON.stringify(arr))
       let newarr = []
       arr.forEach((element) => {
+        // 第一层 先判断最外面一层
         if (element.children && element.children.length) {
-          const ab = this.rebuildData(value, element.children)
-          const obj = {
-            ...element,
-            children: ab
-          }
-          if (ab && ab.length) {
+          // 首先先查第级的
+           if(element.label.indexOf(value)>-1){
+            const obj={
+              ...element
+            }
             newarr.push(obj)
-          }
+           }else{
+              const ab = this.rebuildData(value, element.children)
+              const obj = {
+                ...element,
+                children: ab
+              }
+              if (ab && ab.length) {
+                newarr.push(obj)
+              }
+           }
+
         } else {
           if (this.trimAll(element.label).indexOf(value) > -1) {
             newarr.push(element)
@@ -192,39 +196,21 @@ export default {
     trimAll(ele) {
       return ele.split('').join('')
     },
-    resetHandle(e){
-    console.log(object)
-      console.log("sss")
+    resetHandle(){
       this.input =''
-    },
+      this.hasValue = false
 
-    filterData(value) {
-      console.log(this.cloneData, 'this.cloneDats')
-      // const treeList = JSON.parse(JSON.stringify(this.cloneData))
-      const datax = this.filtersX(value, this.cloneData)
-      console.log(datax, 'ffffff')
-      this.cloneData = datax
     },
-    filtersX(val, dataList) {
-      let data = dataList
-      data.forEach((item) => {
-        if (item.children && item.children.length) {
-          item.children = item.children.filter((x) => {
-            if (x.children && x.children.length) {
-              return x.children
-                .map((a) => a.label)
-                .toString()
-                .includes(val)
-            }
-            return x.label.indexOf(val) !== -1
-          })
-          this.filtersX(val, item.children)
-        } else {
-          data = []
-        }
-      })
-      console.log(data, 'data')
-      return data
+    // 鼠标进入
+    onEnterHandle(e){
+      const value = e.target.value
+       if(value){
+        this.hasValue = true
+       }
+    },
+    // 鼠标移除
+    onLeaveHandle(){
+        this.hasValue = false
     }
   }
 }

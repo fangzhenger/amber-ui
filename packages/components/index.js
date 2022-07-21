@@ -19,6 +19,7 @@ import Main from './main/index'
 import Footer from './footer/index'
 import Aside from './aside/index'
 import Select from './select/index'
+import Select1 from './select1/index'
 import SelectOption from './select-option/index'
 import Space from './space/index'
 import Switch from './switch/index'
@@ -67,6 +68,7 @@ const components = [
   Aside,
   Space,
   Select,
+  Select1,
   SelectOption,
   Switch,
   Modal,

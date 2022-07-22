@@ -17,7 +17,10 @@
           :checked="data.checked"
         ></amber-checkbox>
         <!-- loading 加载 -->
-        <!-- <span v-if="node.loading"> </span> -->
+        <span v-if="data.loading" >
+          <amber-icon icon-class="xiangxia"></amber-icon
+          >
+          </span>
         <span class="tree-ul-list-expand-label" @click.stop="pickHandle(data)">{{
           data.label
         }}</span>

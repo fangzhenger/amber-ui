@@ -29,7 +29,6 @@ exports.Sidebar4ZH = [
       "/basic/infinitescroll",
       "/basic/treeSelect",
       "/basic/treeSelect1",
-      "/basic/Select1",
     ],
   },
 {

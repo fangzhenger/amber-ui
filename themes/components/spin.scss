@@ -1,0 +1,216 @@
+.amber-container {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-spin1 {
+    margin: 0 auto;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      border: 0;
+      position: absolute;
+      background: #00ff00;
+    }
+
+
+    i:first-child {
+      background: #ff8c00;
+      animation-delay: -1.5s;
+    }
+
+    i:nth-child(2) {
+      background: #20b2aa;
+      animation-delay: -1s;
+    }
+
+    i:nth-child(3) {
+      background: #32cd32;
+      animation-delay: -0.5s;
+    }
+
+    i:last-child {
+      background: rgb(205, 50, 166);
+    }
+
+    &-default {
+      i {
+        animation: defaultSpin 2s infinite ease;
+      }
+
+      @keyframes defaultSpin {
+
+        0%,
+        100% {
+          transform: translate(-13px, 0px);
+        }
+
+        25% {
+          transform: translate(0px, -13px);
+        }
+
+        50% {
+          transform: translate(13px, 0);
+        }
+
+        75% {
+          transform: translate(0px, 13px);
+        }
+      }
+    }
+
+    &-large {
+      i {
+        animation: largeSpin 2s infinite ease;
+      }
+
+      @keyframes largeSpin {
+
+        0%,
+        100% {
+          transform: translate(-16px, 0px);
+        }
+
+        25% {
+          transform: translate(0px, -16px);
+        }
+
+        50% {
+          transform: translate(16px, 0);
+        }
+
+        75% {
+          transform: translate(0px, 16px);
+        }
+      }
+    }
+
+    &-small {
+      i {
+        animation: smallSpin 2s infinite ease;
+      }
+
+      @keyframes smallSpin {
+
+        0%,
+        100% {
+          transform: translate(-8px, 0px);
+        }
+
+        25% {
+          transform: translate(0px, -8px);
+        }
+
+        50% {
+          transform: translate(8px, 0);
+        }
+
+        75% {
+          transform: translate(0px, 8px);
+        }
+      }
+    }
+
+  }
+
+  &-spin2 {
+    width: 30px;
+    height: 30px;
+    margin:0 auto;
+    position: relative;
+
+    &-small::before{
+      box-shadow: 0 -8px #65a3d3,
+      /* top */
+      8px 0px,
+      /* right */
+      0 8px,
+      /* bottom */
+      -8px 0 #63bfe4,
+      /* left */
+
+      -5.6px -5.6px #63bfe4,
+      /* left-top */
+      5.6px -5.6px #b1c8ec,
+      /* right-top */
+      5.6px 5.6px,
+      /* right-bottom */
+      -5.6px 5.6px;
+    }
+    &-large::before{
+      box-shadow: 0 -12px #65a3d3,
+      /* top */
+      12px 0px,
+      /* right */
+      0 12px,
+      /* bottom */
+      -12px 0 #63bfe4,
+      /* left */
+
+      -8.4px -8.4px #63bfe4,
+      /* left-top */
+      8.4px -8.4px #b1c8ec,
+      /* right-top */
+      8.4px 8.4px,
+      /* right-bottom */
+      -8.4px 8.4px;
+
+    }
+    &-default::before{
+      box-shadow: 0 -10px #65a3d3,
+      /* top */
+      10px 0px,
+      /* right */
+      0 10px,
+      /* bottom */
+      -10px 0 #63bfe4,
+      /* left */
+
+      -7px -7px #63bfe4,
+      /* left-top */
+      7px -7px #b1c8ec,
+      /* right-top */
+      7px 7px,
+      /* right-bottom */
+      -7px 7px;
+    }
+
+  }
+
+  &-spin2::before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+    color:  #3267EA;
+
+    /* left-bottom */
+    animation: loadingSpin 1s steps(8) infinite;
+    /* center */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+  }
+  @keyframes loadingSpin {
+    0% {
+      transform: rotate(0deg)
+    }
+
+    100% {
+      transform: rotate(360deg)
+    }
+  }
+}

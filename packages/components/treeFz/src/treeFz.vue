@@ -5,6 +5,7 @@
       :key="index"
       :data="item"
       :show-checkbox="showCheckbox"
+      :loading="loading"
     >
     </tree-node>
   </div>
@@ -28,6 +29,10 @@ export default {
       }
     },
     showCheckbox: {
+      type: Boolean,
+      default: false
+    },
+    loading: {
       type: Boolean,
       default: false
     }

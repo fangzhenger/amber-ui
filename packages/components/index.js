@@ -43,6 +43,7 @@ import Card from './card/index'
 import InfiniteScroll from './infinite-scroll/index'
 import TreeSelect from './treeSelect/index'
 import TreeSelect1 from './treeSelect1/index'
+import Spin from './spin/index'
 
 const components = [
   Icon,
@@ -86,7 +87,8 @@ const components = [
   Rate,
   Card,
   TreeSelect,
-  TreeSelect1
+  TreeSelect1,
+  Spin
 ]
 const directives = [InfiniteScroll]
 

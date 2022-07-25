@@ -11,7 +11,7 @@
             <amber-icon icon-class="xiangxia"></amber-icon
           ></span>
         </span>
-        <span class="tree-select-ul-list-expand-label" @click="pickHandle(data.label)" :class="data.children?'':'tree-select-ul-list-expand-label-left' ">{{
+        <span class="tree-select-ul-list-expand-label" @click="pickHandle(data.label)" :class="data.children ? '':'tree-select-ul-list-expand-label-left'">{{
           data.label
         }}</span>
       </div>
@@ -123,7 +123,7 @@ export default {
   &-list {
     list-style: none;
     margin-left: 10px;
-    active:pink;
+    // active:pink;
     &-expand{
       display: flex;
       justify-content: flex-start;

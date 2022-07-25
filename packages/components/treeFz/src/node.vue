@@ -11,19 +11,23 @@
             <amber-icon icon-class="xiangxia"></amber-icon
           ></span>
         </span>
-        <amber-checkbox
-          v-if="showCheckbox"
-          @change="handleCheck"
-          :checked="data.checked"
-        ></amber-checkbox>
-        <!-- loading 加载 -->
-        <span v-if="data.loading" >
-          <amber-icon icon-class="xiangxia"></amber-icon
-          >
-          </span>
-        <span class="tree-ul-list-expand-label" @click.stop="pickHandle(data)">{{
-          data.label
-        }}</span>
+        <span :class="data.children ? '' : 'tree-select-ul-list-expand-label-left'">
+          <amber-checkbox
+            v-if="showCheckbox"
+            @change="handleCheck"
+            :checked="data.checked"
+          ></amber-checkbox>
+          <!-- loading 加载图标展示  tree-select-ul-expand-loadingIcon-->
+          <!-- <span class="container">
+            <span class="shape"></span>
+            <span class="shape"></span>
+            <span class="shape"></span>
+            <span class="shape"></span>
+          </span> -->
+          <span class="tree-ul-list-expand-label" @click.stop="pickHandle(data)">{{
+            data.label
+          }}</span>
+        </span>
       </div>
 
       <!-- 列表 ：递归：自己调自己 -->
@@ -35,6 +39,7 @@
         :key="index"
         :data="item"
         :show-checkbox="showCheckbox"
+        :loading="loading"
       >
       </tree-node>
     </li>
@@ -53,6 +58,10 @@ export default {
       }
     },
     showCheckbox: {
+      type: Boolean,
+      default: false
+    },
+    loading: {
       type: Boolean,
       default: false
     }
@@ -111,18 +120,23 @@ export default {
    padding 0px;
   &-list {
     list-style: none;
-    margin-left: 10px;
+    margin-left: 15px;
     active:pink;
     &-expand{
       display: flex;
       justify-content: flex-start;
       &-icon{
-        margin-right: 10px;
+        margin-right: 5px;
       }
+    &-loadingIcon{
+      animation: ratating 2s linear infinite;
+      display: grid;
+    }
       &-label{
         width: 100%;
         color: currentcolor;    /* 去除默认的颜色和点击后变化的颜色 */
       }
+
       &-label:hover{
        background-color:#BAE7FF
       }
@@ -136,5 +150,73 @@ export default {
       }
     }
   }
+  .tree-select-ul-list-expand-label-left{
+    margin-left: 15px;
+    // display: flex;
+  //   justify-content: center;
+  // align-items: center;
+  }
+      .container {
+      margin: 0 auto;
+      width: 10px;
+      height: 10px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // background: #d8d8d8;
+      // border: 4px solid rgba(225, 0, 0, 0.9);
+      border-radius: 10%;
+    }
+
+    .shape {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      border: 0;
+      position: absolute;
+      background: #00ff00;
+      animation: spin 2s infinite ease;
+    }
+
+    .shape:first-child {
+      background: #ff8c00;
+      animation-delay: -1.5s;
+    }
+
+    .shape:nth-child(2) {
+      background: #20b2aa;
+      animation-delay: -1s;
+    }
+
+    .shape:nth-child(3) {
+      background: #32cd32;
+      animation-delay: -0.5s;
+    }
+
+    .shape:nth-child {
+      background: #32cd32;
+    }
+
+    @keyframes spin {
+
+      0%,
+      100% {
+        transform: translate(-5px, 0px);
+      }
+
+      25% {
+        transform: translate(0px, -5px);
+      }
+
+      50% {
+        transform: translate(5px, 0);
+      }
+
+      75% {
+        transform: translate(0px, 5px);
+      }
+    }
+
 }
 </style>
